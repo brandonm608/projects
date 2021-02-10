@@ -57,14 +57,9 @@ public class Application {
 	}
 
 	private static void loop() {
-		BufferedReader reader = null;
-		OutputStream out = null;
-
-		try {
-			InputStreamReader in = new InputStreamReader(System.in);
-			reader = new BufferedReader(in);
-			out = new BufferedOutputStream(System.out);
-
+		try (InputStreamReader in = new InputStreamReader(System.in);
+				BufferedReader reader = new BufferedReader(in);
+				BufferedOutputStream out = new BufferedOutputStream(System.out)) {
 			String choice = readChoice(out, reader);
 			while (!choice.equals("q")) {
 				Sort<Integer> algorithm = getAlgorithm(choice);
@@ -104,22 +99,6 @@ public class Application {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (out != null) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
