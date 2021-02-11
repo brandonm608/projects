@@ -403,6 +403,7 @@ public class RBTreeSet<T> implements Iterable<T> {
 						node = right;
 					} else {
 						node.setData(item);
+						incModCount();
 						return;
 					}
 				}
