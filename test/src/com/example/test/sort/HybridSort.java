@@ -154,27 +154,31 @@ public class HybridSort<T> extends AbstractSort<T> {
 
 	protected void hybridSort(T[] a, int start, int end) {
 		if (end - start > 7) {
-			int pivot;
+			int i;
 			int j;
-
+			final T pivot;
+			
 			swap(a, medianOf3(a, start, (end - start + 1) / 2, end), start);
+			pivot = a[start];
 
-			pivot = start;
-			j = end;
-
-			for (int i = start + 1; j > pivot;) {
-				if (compare(a[i], a[pivot]) < 0) {
-					swap(a, i, pivot);
-					pivot = i;
+			for (i = start, j = end; i <= j;) {
+				while (compare(a[i], pivot) < 0) {
 					i++;
-				} else {
+				}
+
+				while (compare(a[j], pivot) > 0) {
+					j--;
+				}
+
+				if (i <= j) {
 					swap(a, i, j);
+					i++;
 					j--;
 				}
 			}
 
-			hybridSort(a, start, pivot);
-			hybridSort(a, pivot + 1, end);
+			hybridSort(a, start, i - 1);
+			hybridSort(a, i, end);
 
 			return;
 		}

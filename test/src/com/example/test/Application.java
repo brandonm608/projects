@@ -63,7 +63,7 @@ public class Application {
 			String choice = readChoice(out, reader);
 			while (!choice.equals("q")) {
 				Sort<Integer> algorithm = getAlgorithm(choice);
-				Integer[] filledArray = createFilledArray(500000);
+				Integer[] filledArray = createFilledArray(10000);
 				Integer[] copy1 = Arrays.copyOf(filledArray, filledArray.length);
 				Integer[] copy2 = Arrays.copyOf(filledArray, filledArray.length);
 				Integer[] copy3 = Arrays.copyOf(filledArray, filledArray.length);
@@ -76,6 +76,9 @@ public class Application {
 				deltaTime3 = sort(out, algorithm, copy3, choice);
 
 				println(out, "The median time of 3 runs is " + medianOf3(deltaTime1, deltaTime2, deltaTime3) + "ms");
+				println(out, "Time to sort sorted array: ");
+				sort(out, algorithm, copy3, ARRAYS_SORT);
+				sort(out, algorithm, copy3, choice);
 
 				isArrayEqual = isArraysEqual(filledArray, copy1);
 				println(out, "Matches Arrays Sort: " + isArrayEqual);
